@@ -12,17 +12,11 @@
 C:\JAVA_SPRING\program\sts-bundle\pivotal-tc-server\instances\base-instance\work\Catalina\localhost\jspSite
 
  -->
-<!--  <%
+ 	<%
  	for(int i=0;i<10;i++){
-%>
-		<h1>Hello JSP(안녕JSP)</h1><hr>
-<% } %>
-	<hr/>
--->	
-<%
- 	for(int i=0;i<10;i++){
-		out.print("<h1>Hello JSP(안녕JSP)</h1>");
+    	out.print("<h1>Hello JSP(안녕JSP) "+(i+1)+"</h1><hr>");
 	}
-%>
+	%>
+	<hr/>
 </body>
 </html>
