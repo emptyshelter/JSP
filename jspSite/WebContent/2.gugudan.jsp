@@ -8,7 +8,7 @@
 </HEAD>
 <BODY>
 	<center>
-		<H2>JSP 잘났어 정말 별꼴이야!!!!!!!!!</H2>
+		<H2>JSP 잘났어 정말 최악이야!!!!!!!!!</H2>
 		
 			<img src='tomcat.gif' />
 			<center>
@@ -37,6 +37,28 @@
 				%>
 			</table>
 			<br/>
+			<hr>
+			<p> expression </p>
+			<table border=1 width=600 bgcolor=#CCFF33 bordercolordark=#FF6600
+				cellspacing=0>
+				<%
+					for(int i=0;i<9;i++){ 
+				%>
+				<tr>
+					<%
+						for(int j=0;j<8;j++){
+					%>
+						<td align=center>
+								<%=(j+2)+"*"+(i+1)+"="+(j+2)*(i+1)%>
+						</td>
+					<%
+						}
+					%>
+				</tr>
+				<%
+					} 
+				%>
+			</table>
 	</center>		
 </BODY>
 </HTML>
