@@ -40,20 +40,23 @@ function checkForm(f) {
 	// 1.5~8글자사이
 	// 2.영문,_,숫자 로만구성
 	// 3.숫자로시작하면안되요
-	if((f.id.value.length< 5 || f.id.value.length>8)) {
+	var id = f.id.value;
+	var check = /([^a-zA-Z0-9_])/;
+	var check2 = /[0-9]/;
+	if((id.length< 5 || id.length>8)) {
 		alert("아이디의 길이는 5~8글자 사이여야 합니다");
 		f.id.focus();
 		return false;
 	}
 	console.log(f.id.value);
-	var check = /([^a-zA-Z0-9_])/;
-	if((check.test(f.id.value))){
+	
+	if((check.test(id))){
 		alert("영문,_,숫자 로만구성되어야 합니다.");
 		f.id.focus();
 		return false;
 	}
-	var check2 = /[0-9]/;
-	if (check2.test(f.id.value.charAt(0))) {
+	
+	if (check2.test(id.charAt(0))) {
 		alert("아이디는 숫자로시작할 수 없습니다.");
 		f.id.focus();
 		return false;
