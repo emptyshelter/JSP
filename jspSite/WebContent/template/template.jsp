@@ -8,14 +8,18 @@
 <table width="960" border="1" color="gray" align="center">
 	<tr>
 		<td height="43" colspan=3 align=left>
+			<jsp:include page="top.jsp"></jsp:include>
 			<!-- top-->
 		</td>
 	</tr>
 	<tr>
 		<td width="15%" align=right valign=top><br>
+			<jsp:include page="left.jsp"></jsp:include>
 			<!--left-->
 		</td>
 		<td colspan=2 align=center>
+			<jsp:include page="newitem.jsp"></jsp:include><br>
+			<jsp:include page="bestitem.jsp"></jsp:include>
 			<!--content-->
 		</td>
 	</tr>

@@ -52,9 +52,9 @@
 <script type="text/javascript" src="js/co.js"></script>
 <script type="text/javascript" src="js/member.js"></script>
 </head>
-<body>
+<body onload="init();">
 	<h3 align="center">◆◆◆ 회원가입 ◆◆◆</h3>
-	<form name="join" method="post" action="join.do"
+	<form name="join" method="post" action="4.join.jsp"
 		onsubmit="return checkForm(document.join);">
 		<table id="jointbl" bgcolor="black" cellspacing="1" cellpadding="5" align="center">
 			<tr id="first-tr">
@@ -114,5 +114,6 @@
 			</tr>
 		</table>
 	</form>
+		<%@ include file="5-6.directive_included_file.jspf" %>
 </body>
 </html>

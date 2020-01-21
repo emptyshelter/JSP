@@ -1,0 +1,10 @@
+@charset "UTF-8";
+#supermain{
+	color: red;
+	font-weight: bold;
+}
+p.mainp{
+	padding-left: 30px;
+	color: purple;
+	text-decoration: 10pt;
+}
