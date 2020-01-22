@@ -112,11 +112,8 @@ function checkForm(f) {
 	console.log(f.id.value);
 	
 	if((check.test(id))){
-<<<<<<< HEAD
 		alert("아이디는 영문, _ ,숫자 로만구성되어야 합니다.");
-=======
 		alert("영문,_,숫자 로만구성되어야 합니다.");
->>>>>>> refs/remotes/origin/master
 		f.id.focus();
 		return false;
 	}
