@@ -1,12 +1,23 @@
-
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.itwill.user.UserService"%>
 <%@page import="com.itwill.user.User"%>
 <%@page import="java.util.List"%>
-
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="UTF-8"%>
-
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%	
+	UserService userService = UserService.getInstance();
+	ArrayList<User>userList = userService.findUserList();
+	String loginId = (String)session.getAttribute("sUserId");
+	if(loginId==null){
+		out.println("<script>");
+ 		out.println("alert('로그인을 해주세요');");
+ 		out.println("location.href='user_login_form.jsp';");
+ 		out.println("</script>");
+		return;
+	}
+	response.setContentType("text/html; charset=utf-8");
+%>
 <html>
 <head>
 <title>사용자 관리</title>
@@ -68,16 +79,18 @@ function userList() {
 									</tr>
 									
 									<tr>
+									<%for(User user: userList){ %>
 										<td width=190 align=center bgcolor="ffffff" height="20">
-											userId
+											<%=user.getUserId() %>
 										</td>
 										<td width=200 bgcolor="ffffff" style="padding-left: 10">
-											<a href="user_view.jsp?userId=userId"
-											class="user">name</a>
+											<a href="user_view.jsp?userId=<%=user.getUserId() %>"
+											class="user"> <%=user.getName()%></a>
 										</td>
-										<td width=200 align=center bgcolor="ffffff">email
+										<td width=200 align=center bgcolor="ffffff"><%=user.getEmail() %>
 										</td>
 									</tr>
+									<%} %>
 									
 									
 									

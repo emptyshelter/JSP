@@ -1,6 +1,27 @@
-     
+<%@page import="java.net.URLDecoder"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
+<%	
+
+	/***************case1[redirect]*******************
+	String msg1=request.getParameter("msg1");
+	if(msg1==null)msg1="";
+	msg1=URLDecoder.decode(msg1, "UTF-8");
+	String msg2=request.getParameter("msg2");
+	if(msg2==null)msg2="";
+	msg2=URLDecoder.decode(msg2, "UTF-8");
+	*************************************************/
+	/*****************case2[forward]*****************/
+	String msg1 = (String)request.getAttribute("msg1");
+	if(msg1==null)msg1="";
+	String msg2 = (String)request.getAttribute("msg2");
+	if(msg2==null)msg2="";
+	String fUserId = request.getParameter("userId");
+	if(fUserId==null)fUserId="";
+	String fUserPassword = request.getParameter("password");
+	if(fUserPassword==null)fUserPassword="";
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -72,13 +93,13 @@
 											아이디</td>
 										<td width=490 align="left" bgcolor="ffffff"
 											style="padding-left: 10px"><input type="text"
-											style="width: 150" name="userId" value="">&nbsp;&nbsp;<font color="red"></font></td>
+											style="width: 150" name="userId" value="<%=fUserId %>">&nbsp;&nbsp;<font color="red"><%=msg1%></font></td>
 									</tr>
 									<tr>
 										<td width=100 align=center bgcolor="E6ECDE" height="22">비밀번호</td>
 										<td width=490 align="left" bgcolor="ffffff"
 											style="padding-left: 10px"><input type="password"
-											style="width: 150" name="password" value="">&nbsp;&nbsp;<font color="red"></font></td>
+											style="width: 150" name="password" value="<%=fUserPassword%>">&nbsp;&nbsp;<font color="red"><%=msg2%></font></td>
 									</tr>
 								</table>
 							</form> <br />

@@ -1,6 +1,24 @@
+<%@page import="com.itwill.user.User"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.itwill.user.UserService"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%
+	if (request.getMethod().equalsIgnoreCase("GET")) {
+		response.sendRedirect("user_write_form.jsp");
+		return;
+	}
+	String loginId = (String) session.getAttribute("sUserId");
+	String checkId = request.getParameter("userId");
+	UserService userService = UserService.getInstance();
+	User user = userService.findUser(checkId);
+	if (loginId.equals("admin")) {
+		out.println("<script>");
+		out.println("alert('관리자는 수정도 문제없습니다.');");
+		out.println("</script>");
+	}
+%>
 <html>
 <head>
 <title>사용자 관리</title>
@@ -8,8 +26,35 @@
 <link rel=stylesheet href="css/styles.css" type="text/css">
 <link rel=stylesheet href="css/user.css" type="text/css">
 <script type="text/javascript">
-	function userModify() {
+	function userUpdate() {
+		if (f.password.value == "") {
+			alert("비밀번호를 입력하십시요.");
+			f.password.focus();
+			return false;
+		}
+		if (f.password2.value == "") {
+			alert("비밀번호확인을 입력하십시요.");
+			f.password2.focus();
+			return false;
+		}
+		if (f.name.value == "") {
+			alert("이름을 입력하십시요.");
+			f.name.focus();
+			return false;
+		}
+		if (f.email.value == "") {
+			alert("이메일 주소를 입력하십시요.");
+			f.email.focus();
+			return false;
+		}
+		if (f.password.value != f.password2.value) {
+			alert("비밀번호와 비밀번호확인은 일치하여야합니다.");
+			f.password.focus();
+			f.password.select();
+			return false;
+		}
 		f.action = "user_modify_action.jsp";
+		f.method = 'POST';
 		f.submit();
 	}
 	function userList() {
@@ -55,40 +100,40 @@
 								</tr>
 							</table> <!-- update Form  -->
 							<form name="f" method="post">
-								<input type="hidden" name="userId" value="guard" />
+								<input type="hidden" name="userId" value="<%=user.getUserId()%>" />
 								<table border="0" cellpadding="0" cellspacing="1" width="590"
 									bgcolor="BBBBBB">
 									<tr>
 										<td width=100 align=center bgcolor="E6ECDE" height="22">사용자
 											아이디</td>
 										<td width=490 bgcolor="ffffff" style="padding-left: 10px"
-											align="left">guard</td>
+											align="left"><%=user.getUserId()%></td>
 									</tr>
 									<tr>
 										<td width=100 align=center bgcolor="E6ECDE" height="22">비밀번호</td>
 										<td width=490 bgcolor="ffffff" style="padding-left: 10px"
 											align="left"><input type="password" style="width: 150px"
-											name="password" value="1111"></td>
+											name="password" value="<%=user.getPassword()%>"></td>
 									</tr>
 									<tr>
 										<td width=100 align=center bgcolor="E6ECDE" height="22">비밀번호
 											확인</td>
 										<td width=490 bgcolor="ffffff" style="padding-left: 10px"
 											align="left"><input type="password" style="width: 150px"
-											name="password2" value="1111"></td>
+											name="password2" value="<%=user.getPassword()%>"></td>
 									</tr>
 									<tr>
 										<td width=100 align=center bgcolor="E6ECDE" height="22">이름</td>
 										<td width=490 bgcolor="ffffff" style="padding-left: 10px"
 											align="left"><input type="text" style="width: 150px"
-											name="name" value="김경호"></td>
+											name="name" value="<%=user.getName()%>"></td>
 									</tr>
 									<tr>
 										<td width=100 align=center bgcolor="E6ECDE" height="22">이메일
 											주소</td>
 										<td width=490 bgcolor="ffffff" style="padding-left: 10px"
 											align="left"><input type="text" style="width: 150px"
-											name="email" value="guard883@gmail.com"></td>
+											name="email" value="<%=user.getEmail()%>"></td>
 									</tr>
 								</table>
 							</form> <br>
@@ -96,11 +141,10 @@
 							<table width=590 border=0 cellpadding=0 cellspacing=0>
 								<tr>
 									<td align=center><input type="button" value="수정"
-										onClick="userModify()"> &nbsp; <input type="button"
+										onClick="userUpdate()"> &nbsp; <input type="button"
 										value="목록" onClick="userList()"></td>
 								</tr>
 							</table>
-
 						</td>
 					</tr>
 				</table>
@@ -118,3 +162,4 @@
 	<!--container end-->
 </body>
 </html>
+

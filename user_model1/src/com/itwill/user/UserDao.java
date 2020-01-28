@@ -19,6 +19,7 @@ public class UserDao  {
 	public UserDao() throws Exception {
 		InitialContext ic=new InitialContext();
 		dataSource=(DataSource)ic.lookup("java:/comp/env/jdbc/OracleDB");
+		System.out.println("UserDao()생성자:"+this);
 	}
 	/*
 	 * 사용자관리테이블에 새로운사용자생성
@@ -157,8 +158,7 @@ public class UserDao  {
 		Connection con=null;
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
-		String existedQuery="select count(*) cnt from userinfo" +
-							" where userid=?";
+		String existedQuery="select count(*) cnt from userinfo where userid=?";
 		try{
 			con=dataSource.getConnection();
 			pstmt=con.prepareStatement(existedQuery);

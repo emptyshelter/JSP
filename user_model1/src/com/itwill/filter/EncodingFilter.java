@@ -6,6 +6,8 @@ import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletResponse;
 public class EncodingFilter implements Filter {
 	private String encoding = null;
 	/**
@@ -38,12 +40,14 @@ public class EncodingFilter implements Filter {
 
 		if (request.getCharacterEncoding() == null) {
 			if (encoding != null) {
-				request.setCharacterEncoding(encoding);
+				request.setCharacterEncoding(this.encoding);
 			}
 		}
 		chain.doFilter(request, response);
+		//HttpServletResponse r= (HttpServletResponse) response;
+		//r.sendRedirect("user_login_form.jsp");
 	}
-	public void destroy() {
+	public void destroy() {	
 		//System.out.println("필터객체가 메모리에서 해지될때호출 destroy()");
 		this.encoding = null;
 	}
